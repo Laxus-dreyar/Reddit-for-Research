@@ -1,0 +1,13 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+h6 {
+     color:white;
+     vertical-align:text-top;
+}
+td {
+    vertical-align: top;
+}

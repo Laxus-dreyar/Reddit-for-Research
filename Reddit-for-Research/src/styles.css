@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.css';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.preview {
+  display: block;
+  text-align: center;
+}
+
+.preview img {
+  max-width: 100%;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.table {
+  width: 700px;
+  margin: 30px auto;
+}
+
+.user-table {
+  margin: 25px auto;
+  max-width: 520px;
+}
+
+.user-table img {
+  width: 100px;
+}
+
+.media {
+  margin-bottom: 15px;
+  background: #f3f3f3;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.media .mb-1 {
+  margin-top: 9px !important;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  list-style-type: none;
+}

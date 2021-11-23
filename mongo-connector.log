@@ -1,0 +1,56 @@
+2020-05-19 16:23:45,295 [ALWAYS] mongo_connector.connector:50 - Starting mongo-connector version: 2.7.0
+2020-05-19 16:23:45,296 [ALWAYS] mongo_connector.connector:50 - Python version: 2.7.17 (default, Apr 15 2020, 17:20:14) 
+[GCC 7.5.0]
+2020-05-19 16:23:45,296 [ALWAYS] mongo_connector.connector:50 - Platform: Linux-4.15.0-99-generic-x86_64-with-Ubuntu-18.04-bionic
+2020-05-19 16:23:45,296 [ALWAYS] mongo_connector.connector:50 - pymongo version: 3.10.1
+2020-05-19 16:23:45,297 [WARNING] mongo_connector.connector:170 - MongoConnector: Can't find /home/karsh/dass41/oplog.timestamp, attempting to create an empty progress log
+2020-05-19 16:23:45,461 [ALWAYS] mongo_connector.connector:50 - Source MongoDB version: 4.2.3
+2020-05-19 16:23:45,461 [ALWAYS] mongo_connector.connector:50 - Target DocManager: mongo_connector.doc_managers.elastic2_doc_manager version: 0.4.0
+2020-05-19 16:42:17,415 [WARNING] elasticsearch:97 - PUT http://127.0.0.1:9200/reddit-for-research/_mapping/documents [status:400 request:0.047s]
+2020-05-19 16:42:17,477 [ERROR] mongo_connector.oplog_manager:308 - Unable to process oplog document {u'wall': datetime.datetime(2020, 5, 19, 11, 12, 17, 333000), u'h': 0L, u'ts': Timestamp(1589886737, 1), u'o': {u'create': u'documents', u'idIndex': {u'ns': u'Reddit-for-Research.documents', u'name': u'_id_', u'key': {u'_id': 1}, u'v': 2}}, u'ui': UUID('a062bc7b-3078-4494-b83c-9cdf61a41136'), u't': 1L, u'v': 2, u'ns': u'Reddit-for-Research.$cmd', u'op': u'c'}
+Traceback (most recent call last):
+  File "/home/karsh/.local/lib/python2.7/site-packages/mongo_connector/oplog_manager.py", line 304, in run
+    docman.handle_command(doc, entry["ns"], timestamp)
+  File "/home/karsh/.local/lib/python2.7/site-packages/mongo_connector/util.py", line 46, in wrapped
+    reraise(new_type, exc_value, exc_tb)
+  File "/home/karsh/.local/lib/python2.7/site-packages/mongo_connector/util.py", line 35, in wrapped
+    return f(*args, **kwargs)
+  File "/home/karsh/.local/lib/python2.7/site-packages/mongo_connector/doc_managers/elastic2_doc_manager.py", line 261, in handle_command
+    index=db.lower(), doc_type=coll, body={"_source": {"enabled": True}}
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/client/utils.py", line 73, in _wrapped
+    return func(*args, params=params, **kwargs)
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/client/indices.py", line 282, in put_mapping
+    '_mapping', doc_type), params=params, body=body)
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/transport.py", line 312, in perform_request
+    status, headers, data = connection.perform_request(method, url, params, body, ignore=ignore, timeout=timeout)
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/connection/http_urllib3.py", line 129, in perform_request
+    self._raise_error(response.status, raw_data)
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/connection/base.py", line 125, in _raise_error
+    raise HTTP_EXCEPTIONS.get(status_code, TransportError)(status_code, error_message, additional_info)
+OperationFailed: TransportError(400, u'illegal_argument_exception', u'Types cannot be provided in put mapping requests, unless the include_type_name parameter is set to true.')
+2020-05-19 16:42:32,531 [WARNING] elasticsearch:97 - POST http://127.0.0.1:9200/_bulk [status:N/A request:10.010s]
+Traceback (most recent call last):
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/connection/http_urllib3.py", line 115, in perform_request
+    response = self.pool.urlopen(method, url, body, retries=False, headers=self.headers, **kw)
+  File "/home/karsh/.local/lib/python2.7/site-packages/urllib3/connectionpool.py", line 725, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/karsh/.local/lib/python2.7/site-packages/urllib3/util/retry.py", line 379, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/karsh/.local/lib/python2.7/site-packages/urllib3/connectionpool.py", line 677, in urlopen
+    chunked=chunked,
+  File "/home/karsh/.local/lib/python2.7/site-packages/urllib3/connectionpool.py", line 428, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/home/karsh/.local/lib/python2.7/site-packages/urllib3/connectionpool.py", line 336, in _raise_timeout
+    self, url, "Read timed out. (read timeout=%s)" % timeout_value
+ReadTimeoutError: HTTPConnectionPool(host=u'127.0.0.1', port=9200): Read timed out. (read timeout=10)
+2020-05-19 16:42:34,318 [ERROR] mongo_connector.doc_managers.elastic2_doc_manager:503 - Bulk request failed with exception
+Traceback (most recent call last):
+  File "/home/karsh/.local/lib/python2.7/site-packages/mongo_connector/doc_managers/elastic2_doc_manager.py", line 495, in send_buffered_operations
+    successes, errors = bulk(self.elastic, action_buffer)
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/helpers/__init__.py", line 257, in bulk
+    for ok, item in streaming_bulk(client, actions, **kwargs):
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/helpers/__init__.py", line 192, in streaming_bulk
+    raise_on_error, **kwargs)
+  File "/home/karsh/.local/lib/python2.7/site-packages/elasticsearch/helpers/__init__.py", line 99, in _process_bulk_chunk
+    raise e
+ConnectionTimeout: ConnectionTimeout caused by - ReadTimeoutError(HTTPConnectionPool(host=u'127.0.0.1', port=9200): Read timed out. (read timeout=10))

@@ -1,0 +1,26 @@
+version: '3' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+ client:
+   build: ./client
+   ports:
+     - "80:4200"
+ server: # name of the first service
+   build: ./server # specify the directory of the Dockerfile
+   ports:
+     - "8080:8080"
+#    environment:
+#      - MONGO_URL=mongodb://database/mean-app
+#    links:
+#      - database
+#    depends_on:
+#      - database
+#  database: # name of the third service
+#    image: mongo # specify image to build container from
+#    volumes:
+#      - "/data/db:/data/db"
+#    ports:
+#      - "27017:27017" # specify port forewarding
+
+# DOCKER_HOST: 0.0.0.0

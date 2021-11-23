@@ -1,0 +1,136 @@
+<div class="bg-gradient-default" style="height: calc(100% - 87px); overflow: auto;">
+    <div *ngIf="(retrievedFlag == false)" style="padding-top: 10vh;">
+        <h1 class="display-1 mb-0" align="center" color="white">Categories</h1><br>
+        <div class="container shape-container d-flex">
+            <div class="col-3">
+                <a #physics (click)="retrieveQuery(physics.name)" name="Physics"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank" width="100">
+                    <span class="text-white">Physics</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #maths (click)="retrieveQuery(maths.name)" name="Mathematics"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Mathematics</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #compsci (click)="retrieveQuery(compsci.name)" name="Computer Science"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Computer Science</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #bio (click)="retrieveQuery(bio.name)" name="Biology"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Biology</span>
+                </a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container shape-container d-flex">
+            <div class="col-3">
+                <a #eco (click)="retrieveQuery(eco.name)" name="Economics"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Economics</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #lingo (click)="retrieveQuery(lingo.name)" name="Linguistics"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Linguistics</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #humanities (click)="retrieveQuery(humanities.name)" name="Humanities"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Humanities</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #eng (click)="retrieveQuery(eng.name)" name="Engineering"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Engineering</span>
+                </a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container shape-container d-flex">
+            <div class="col-3">
+                <a #finance (click)="retrieveQuery(finance.name)" name="Finance"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Finance</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #env (click)="retrieveQuery(env.name)" name="Environmental Sciences"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Environmental Sciences</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #law (click)="retrieveQuery(law.name)" name="Law" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0"
+                    target="_blank">
+                    <span class="text-white">Law</span>
+                </a>
+            </div>
+            <div class="col-3">
+                <a #stats (click)="retrieveQuery(stats.name)" name="Statistics"
+                    class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="text-white">Statistics</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="alert alert-danger text-center" role="alert" *ngIf="(retrievedFlag == true && results.length <= 0)"
+            style="margin-top: 5vh;">
+            <h4 class="text-white">This Category - {{query}} - does not have any documents yet</h4>
+        </div>
+        <div *ngIf="(retrievedFlag == true)">
+            <h1 class="display-1 mb-0" align="center" color="white">{{query}}</h1>
+            <a align="center" (click)="returnCategories()" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                <span class="btn-inner--icon"><i class="ni ni-spaceship"></i></span>
+                <span class="btn-inner--text">Return to Categories</span>
+            </a>
+            <ul>
+                <li *ngFor="let document of results; let i = index">
+                    <div class="container-lg"
+                        style="max-width: 2000px; padding-top: 2vh; padding-bottom: 2vh; border-bottom: 0.25vh solid #4588ba;">
+                        <div class="row h-100">
+                            <div class="col-4">
+                                <div style="position:absolute; top:35%; left:15%">
+                                    <h3 style="color: white">Document Details</h3>
+                                    <h6 style="color: white">ID: {{document._id}}</h6>
+                                    <h6 style="color: white">Name: {{document._source.name}}</h6>
+                                    <h6 style="color: white">Author: {{document._source.author}}</h6>
+                                    <h6 style="color: white">Field: {{document._source.field}}</h6>
+                                    <h6 style="color: white">Year Published: {{document._source.yearofpublish}}</h6>
+                                    <button class="btn btn-white my-2" (click)="changeFlag(i)">Annotate/view
+                                        annotations</button><br>
+                                    <button class="btn btn-white my-2"
+                                        (click)="goToUrl('/assets/PDFViewer/viewer/web/viewer.html?file='+document._source.link)">Open
+                                        full screen</button>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe *ngIf="flags[i] == true"
+                                        [src]="sanitize('/assets/PDFViewer/viewer/web/viewer.html?file='+document._source.link)"></iframe>
+                                    <iframe *ngIf="flags[i] == false" [src]="sanitize(document._source.link)"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

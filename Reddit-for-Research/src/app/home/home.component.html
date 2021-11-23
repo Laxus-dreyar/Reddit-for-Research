@@ -1,0 +1,68 @@
+<section class="section section-shaped section-lg" style="height: calc(100% - 87px); overflow: auto;">
+    <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="container shape-container d-flex align-items-center py-lg">
+        <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div *ngIf="currentUser!=null">
+                        <h2 class="text-white"> Welcome, {{currentUser['name']}}!</h2>
+                        <br>
+                    </div>
+                    <img src="./assets/img/brand/logo.png" style="width: 10vw;" class="img-fluid">
+                    <p class="lead text-white">Seeks to aid collaboration in Research<br>
+                        Descigned for the Researchers<br>
+                        By the Researchers</p>
+                    <div *ngIf="currentUser==null; else block">
+                        <div class="btn-wrapper mt-5">
+                            <a routerLink="/login" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                                <span class="btn-inner--icon"><i class="ni ni-lock-circle-open"></i></span>
+                                <span class="btn-inner--text">Login</span>
+                            </a>
+                            <a routerLink="/register" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                                <span class="btn-inner--icon"><i class="ni ni-email-83"></i></span>
+                                <span class="btn-inner--text">Sign Up</span>
+                            </a>
+                            <br>
+                            <button class="btn btn-lg btn-white my-2 btn-icon"
+                                (click)="this.router.navigate(['documents-list'])">
+                                <span class="btn-inner--icon"><i class="ni ni-books"></i></span>
+                                <span class="btn-inner--text">View Documents</span>
+                            </button>
+                        </div>
+                    </div>
+                    <ng-template #block>
+                        <button class="btn btn-white btn-icon" (click)="this.router.navigate(['add-document'])">
+                            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                            <span class="btn-inner--text">Add Document</span>
+                        </button>
+                        <button class="btn btn-white btn-icon" (click)="this.router.navigate(['documents-list'])">
+                            <span class="btn-inner--icon"><i class="ni ni-books"></i></span>
+                            <span class="btn-inner--text">View Documents</span>
+                        </button><br>
+                        <button class="btn btn-white my-2 btn-icon" (click)="this.router.navigate(['profile', currentUser['username']])">
+                            <span class="btn-inner--icon"><i class="ni ni-briefcase-24"></i></span>
+                            <span class="btn-inner--text">My profile</span>
+                        </button>
+                    </ng-template>
+
+                    <div class="mt-5">
+                        <small class="font-weight-bold mb-0 mr-2 text-white">*proudly coded by</small>
+                        <a href="https://descign.com//"><img
+                                src="./assets/img/brand/cropped-editado-e14962536293492.png" style="height: 28px;"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

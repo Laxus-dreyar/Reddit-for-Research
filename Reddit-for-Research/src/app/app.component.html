@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient-default">
+    <a routerLink="/"><img src="../assets/img/brand/cropped-editado-e14962536293492.png" alt="Descign Logo" height="38"
+            width="120"></a>
+    <button class="btn navbar-brand" routerLink="/">Reddit for Research</button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <input #search class="form-control bg-gradient-default " style="width: 58%; display: block; text-align: center;" (keyup.enter)="submit(search.value)" placeholder="Search" />
+
+        <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Action</a>
+            <a href="#" class="dropdown-item">Another action</a>
+        </div>
+
+        <ul *ngIf="currentUser==null" class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" routerLinkActive="active"
+                    routerLink="/documents-list">View Documents</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" routerLinkActive="active"
+                    routerLink="/register">Register</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" routerLinkActive="active"
+                    routerLink="/login">Login</button>
+            </li>
+        </ul>
+
+        <ul *ngIf="currentUser!=null" class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" routerLinkActive="active"
+                    routerLink="/add-document">Upload Document</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" routerLinkActive="active"
+                    routerLink="/documents-list">View Documents</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" routerLinkActive="active"
+                    routerLink="/categories">Categories</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-gradient-default nav-link" (click)="logout()">Logout</button>
+            </li>
+        </ul>
+
+
+    </div>
+</nav>
+
+
+
+<router-outlet></router-outlet>

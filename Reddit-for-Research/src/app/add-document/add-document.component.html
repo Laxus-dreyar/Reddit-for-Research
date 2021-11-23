@@ -1,0 +1,50 @@
+<section class="section section-shaped section-lg" style="height: calc(100% - 87px); overflow: auto;">
+    <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div *ngIf="currentUser!=null; else error_block" class="container" style="width: 15vw">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+
+            <div class="form-group" style="margin-left: 2.5vw">
+                <label class="upload">
+                    <input class="inputfile bg-gradient-default" type="file" (change)="uploadFile($event)" required />
+                    <span class="upload-default btn btn-white">Select a file</span>
+                    <span class="upload-selected btn btn-white">File selected</span>
+                </label>
+            </div>
+            <div class="form-group input-group">
+                <input class="form-control bg-gradient-default" placeholder="Document name" formControlName="name" />
+            </div>
+            <div class="form-group input-group">
+                <input class="form-control bg-gradient-default" placeholder="Author" formControlName="author" />
+            </div>
+            <div class="form-group input-group">
+                <input type="number" class="form-control bg-gradient-default" placeholder="Year of publish"
+                    formControlName="publish" />
+            </div>
+            <div class="form-group input-group">
+                <input class="form-control bg-gradient-default" placeholder="Field" formControlName="field" />
+            </div>
+            <div class="form-group" style="margin-left: 2vw">
+                <button class="btn btn-white btn-lg my-1">Upload document</button>
+            </div>
+        </form>
+    </div>
+
+    <ng-template #error_block>
+        <div class="alert alert-danger text-center" role="alert">
+            <h4 class="text-white"> Please login to access this functionality! </h4>
+        </div>
+    </ng-template>
+
+</section>

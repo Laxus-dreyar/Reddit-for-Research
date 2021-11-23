@@ -1,0 +1,100 @@
+<section class="section section-shaped section-lg" style="height: calc(100% - 87px); overflow: auto;">
+    <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="container pt-lg-md">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card bg-secondary shadow border-0">
+                    <!-- <div class="card-header bg-white pb-5"> -->
+                        <!-- <div class="text-muted text-center mb-3"> -->
+                            <!-- <small>Sign up with</small> -->
+                        <!-- </div> -->
+                        <!-- <div class="text-center"> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4"> -->
+                                <!-- <span class="btn-inner--icon"> -->
+                                    <!-- <img src="./assets/img/icons/common/github.svg"> -->
+                                <!-- </span> -->
+                                <!-- <span class="btn-inner--text">Github</span> -->
+                            <!-- </a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-neutral btn-icon"> -->
+                                <!-- <span class="btn-inner--icon"> -->
+                                    <!-- <img src="./assets/img/icons/common/google.svg"> -->
+                                <!-- </span> -->
+                                <!-- <span class="btn-inner--text">Google</span> -->
+                            <!-- </a> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    <div class="card-body bg-white px-lg-5 py-lg-5">
+                        <div class="text-center mb-4">
+                            <h5>Sign up with credentials</h5>
+                        </div>
+                        <form [formGroup]="form" role="form" (ngSubmit)="submitForm()">
+                            <div class="form-group" [ngClass]="{'focused':focus===true}">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Full name" type="text" (focus)="focus=true"
+                                        (blur)="focus=false" formControlName="name">
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Date of birth" type="date" (focus)="focus1=true"
+                                        (blur)="focus1=false" formControlName="dateofbirth">
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="{'focused':focus2===true}">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Email address" type="email"
+                                        (focus)="focus2=true" (blur)="focus2=false" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="{'focused':focus3===true}">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-credit-card"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Username" type="text" (focus)="focus3=true"
+                                        (blur)="focus3=false" formControlName="username">
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="{'focused':focus4===true}">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Password" type="password"
+                                        (focus)="focus4=true" (blur)="focus4=false" formControlName="password">
+                                </div>
+                            </div>
+                            <div class="text-muted font-italic">
+                                <small>Recommended password length: 8+ characters </small>
+                            </div>
+                            <div class="form-group text-center">
+                                <button class="btn btn-primary mt-4">Create account</button>
+                            </div>
+                            <div class="text-center font-bold">
+                                <p>Already a researcher? <a routerLink="/login">Login here</a>!</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

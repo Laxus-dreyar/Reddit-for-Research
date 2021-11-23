@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<div class="bg-gradient-default" style="height: calc(100% - 87px); overflow: auto;">
+    <div>
+        <div class="alert alert-danger text-center" role="alert" style="margin-top: 5vh;"
+            *ngIf="(this.currentUser == null)">
+            <h4 class="text-white">Please login to access this functionality!</h4>
+        </div>
+        <div class="alert alert-danger text-center" role="alert" style="margin-top: 5vh;"
+            *ngIf="(this.currentUser != null && this.username == null)">
+            <h4 class="text-white">Profile not found!</h4>
+        </div>
+
+        <div class="container pt-lg-md" *ngIf="(this.currentUser != null && this.username != null)">
+            <div class="row justify-content-center" style="padding-bottom: 2vh">
+                <div class="col-lg-5">
+                    <div class="card bg-secondary shadow border-0">
+                        <div class="card-body px-lg-5 py-lg-5">
+                            <div class="text-center mb-4">
+                                <h5>Full name: {{this.profile.name}}</h5>
+                                <h5>Username: {{this.profile.username}}</h5>
+                                <h5>Date of birth: {{this.profile.dateofbirth}}</h5>
+                                <h5><a href="mailto: {{this.profile.email}}">{{this.profile.email}}</a></h5>
+                                <h5>Post count: {{documents.length}} </h5>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-danger text-center" role="alert" style="margin-top: 5vh;"
+            *ngIf="(this.currentUser != null && this.username != null && retrievedFlag == true && documents.length <= 0)">
+            <h4 class="text-white">No documents available!</h4>
+        </div>
+
+        <ul style="padding: 0;">
+            <li *ngFor="let document of documents; let i = index">
+                <div class="container-lg"
+                    style="max-width: 2000px; padding-top: 2vh; padding-bottom: 2vh; border-top: 0.25vh solid #4588ba; border-bottom: 0.25vh solid #4588ba;">
+                    <div class="row" style="height: 80vh">
+                        <div class="col-4">
+                            <div style="position:absolute; top:30%; left:15%">
+                                <h3 style="color: white">Document Details</h3>
+                                <h6 style="color: white">Name: {{document.name}}</h6>
+                                <h6 style="color: white">Author: {{document.author}}</h6>
+                                <h6 style="color: white">Field: {{document.field}}</h6>
+                                <h6 style="color: white">Year Published: {{document.yearofpublish}}</h6>
+                                <h6 style="color: white"> Uploaded by: <a
+                                        href="profile/{{document.uploadedby}}"><u>{{document.uploadedby}}</u></a></h6>
+                                <button class="btn btn-white my-2" (click)="changeFlag(i)">Annotate/view
+                                    annotations</button><br>
+                                <button class="btn btn-white my-2"
+                                    (click)="goToUrl('/assets/PDFViewer/viewer/web/viewer.html?file='+document.link)">Open
+                                    full screen</button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe id="iframe1" *ngIf="flags[i] == true"
+                                    [src]="sanitize('/assets/PDFViewer/viewer/web/viewer.html?file='+document.link)"></iframe>
+                                <iframe id="iframe2" *ngIf="flags[i] == false"
+                                    [src]="sanitize(document.link+'#zoom=100')"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

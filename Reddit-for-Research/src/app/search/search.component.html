@@ -1,0 +1,134 @@
+<div class="bg-gradient-default" style="height: calc(100% - 87px); overflow: auto;">
+
+    <input #search class="form-control bg-gradient-default" (keyup.enter)="retrieveQuery(search.value)"
+        placeholder="Search" />
+
+    <button class="btn btn-white my-4" (click)="retrieveQuery(search.value)"> Search </button>
+    <table CELLPADDING=5>
+        <tr>
+            <td>
+                <h6 class="mb-0">Advanced Search</h6>
+            </td>
+            <td align="right">
+                <label class="custom-toggle">
+                    <input type="checkbox" (click)="showoptions()">
+                    <span class="custom-toggle-slider rounded-circle"></span>
+                </label>
+            </td>
+        </tr>
+    </table>
+    <!-- <button class="btn btn-white my-4" (click)="showoptions()"> Advanced Search </button> -->
+    <form *ngIf="showOptions">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input class="custom-control-input" id="multi" type="checkbox" (click)="MultipleFields()">
+                        <label class="custom-control-label" for="multi">
+                            <span class="text-white">Multiple Fields</span>
+                        </label><br>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input class="custom-control-input" id="year" type="checkbox" (click)="SearchYear()">
+                        <label class="custom-control-label" for="year">
+                            <span class="text-white">Search By Year of Publication</span>
+                        </label><br>
+                    </div>
+                </div><br>
+            </div>
+        </div>
+    </form>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <form *ngIf="multiFlag">
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input class="custom-control-input" id="author" type="checkbox" (click)="AuthorFlag()">
+                        <label class="custom-control-label" for="author">
+                            <span class="text-white">Author</span>
+                        </label><br>
+                    </div>
+                    <!-- <input type="checkbox" id="author" name="author" value="author" (click)="AuthorFlag()">
+                <label for="author">Author</label><br> -->
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input class="custom-control-input" id="field" type="checkbox" (click)="FieldFlag()">
+                        <label class="custom-control-label" for="field">
+                            <span class="text-white">Field</span>
+                        </label><br>
+                    </div>
+                </form>
+                <!-- <input type="checkbox" id="field" name="field" value="field" (click)="FieldFlag()">
+                <label for="field">Field</label><br> -->
+            </div>
+
+            <div class="col-3">
+                <form *ngIf="yearFlag">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-5.5" align="left">
+                                <table CELLSPACING=0 CELLPADDING=5>
+                                    <tr>
+                                        <td>
+                                            <label for="minyear" class="text-white">From:</label>
+                                            <input class="form-control bg-gradient-default" type="number" id="minyear"
+                                                name="minyear" min="1900" max="2020" value="1900">
+                                        </td>
+                                        <td>
+                                            <label for="maxyear" class="text-white">To:</label>
+                                            <input class="form-control bg-gradient-default" type="number" id="maxyear"
+                                                name="maxyear" min="1900" max="2020" value="2020">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="alert alert-danger text-center" role="alert" *ngIf="(retrievedFlag == true && results.length <= 0)"
+            style="margin-top: 5vh;">
+            <h4 class="text-white">Your search - {{query}} - did not match any documents/annotations</h4>
+        </div>
+
+        <ul>
+            <li *ngFor="let document of results; let i = index">
+                <div class="container-lg"
+                    style="max-width: 2000px; padding-top: 2vh; padding-bottom: 2vh; border-bottom: 0.25vh solid #4588ba;">
+                    <div class="row h-100">
+                        <div class="col-4">
+                            <div style="position:absolute; top:35%; left:15%">
+                                <h3 style="color: white">Document Details</h3>
+                                <h6 style="color: white">Name: {{document._source.name}}</h6>
+                                <h6 style="color: white">Author: {{document._source.author}}</h6>
+                                <h6 style="color: white">Field: {{document._source.field}}</h6>
+                                <h6 style="color: white">Year Published: {{document._source.yearofpublish}}</h6>
+                                <h6 style="color: white">Uploaded by: {{document._source.uploadedby}}</h6>
+                                <button class="btn btn-white my-2" (click)="changeFlag(i)">Annotate/view
+                                    annotations</button><br>
+                                <button class="btn btn-white my-2"
+                                    (click)="goToUrl('/assets/PDFViewer/viewer/web/viewer.html?file='+document._source.link)">Open
+                                    full screen</button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe *ngIf="flags[i] == true"
+                                    [src]="sanitize('/assets/PDFViewer/viewer/web/viewer.html?file='+document._source.link)"></iframe>
+                                <iframe *ngIf="flags[i] == false" [src]="sanitize(document._source.link)"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>

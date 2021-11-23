@@ -1,0 +1,15 @@
+label.upload input[type="file"] {
+    position:absolute;
+    top: -1000px;
+}
+
+.upload span {
+    display:none;
+}
+.upload :invalid ~ .upload-default{
+    display: inline;
+}
+.upload :valid ~ .upload-selected{
+    display: inline;
+    color: #4A4;
+}
